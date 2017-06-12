@@ -1,6 +1,4 @@
-#Mehrdad Khojasteh
-
-#Load my csv files
+#Load the csv files
 train<-read.csv("/Users/mehrdadkhojasteh/Desktop/Train.csv",header=T,sep=",")
 test<-read.csv("/Users/mehrdadkhojasteh/Desktop/Test.csv",header=T,sep=",")
 
@@ -24,15 +22,6 @@ require(class)
 str(train)
 sqrt(576)
 
-#knn with k=23
-m1<-knn(train = ntrain,test = ntest, cl=train_target, k=23 )
-m1
-
-#make a tabel that have our result and save it as a csv file
-submitdf<-data.frame(X=test$X, Made.Donation.in.March.2007=m1)
-write.csv(submitdf,file = "Mehrdad_Khojasteh.csv", row.names = FALSE)
-
-#############################################################
 #First I did a cross validation in the train data to see how accurate is my knn
 #I used caret with doSnow for parallelization
 
@@ -63,3 +52,13 @@ knn.5.cv<-train(x=ntrain, y=make.names(xtrain$Made.Donation.in.March.2007), meth
 stopCluster(cl)
 knn.5.cv
 # I saw that with k=23 I have 0.7746041 accuracy
+
+#knn with k=23
+m1<-knn(train = ntrain,test = ntest, cl=train_target, k=23 )
+m1
+
+#make a tabel that have our result and save it as a csv file
+submitdf<-data.frame(X=test$X, Made.Donation.in.March.2007=m1)
+write.csv(submitdf,file = "Results.csv", row.names = FALSE)
+
+#############################################################
